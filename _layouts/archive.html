@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+
+{% for post in site.posts %}
+{% for cat in post.categories %}
+{% if cat == page.category %}
+
+
+
+<div class="post">
+<h2 class="postTitle">
+  <a class='postLink glitter' href="{{site.url}}{{site.baseurl}}{{post.url}}">{{post.title}}</a>
+  </h2>
+  <div class="postExt">  
+    <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
+ {{ post.description | strip_html | truncate:200}}
+  </div>
+</div>
+
+
+{% endif %}
+{% endfor %}
+
+{% endfor %}

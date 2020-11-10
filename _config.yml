@@ -1,0 +1,32 @@
+name: "Livekpop"
+title: "Livekpop"
+description: "Learn Korean from Hindi. Girl groups wiki and misc."
+
+markdown: kramdown
+highlighter: rouge
+javascript_enabled: true
+paginate: 5
+featured_posts_title: Featured Posts
+featured_posts:
+  - url: '#'
+    title: 'Featured post #1'
+  - url: '#'
+    title: 'Featured post #2'
+  - url: '#'
+    title: 'Featured post #3'
+
+collections:
+  news:
+    title: News
+    output: true
+
+defaults:
+  - scope:
+      type: news
+    values:
+      title: News
+      permalink: /news/:title
+
+plugins:
+  - jekyll-sitemap  
+  - jekyll-paginate

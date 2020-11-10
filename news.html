@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<main class="home-main">
+    {% for collection in site.collections %}
+      {% if collection.docs.size > 0 and collection.title == "News"%}
+      <section id="posts">
+            <h3 class="home-page-heading">{{ collection.title }}</h3>
+          <div class="parent">
+            {% for post in collection.docs %}
+            <div class="post-wrapper">
+              <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m/%Y" }}</time>
+              <a class="post-link" href="{{ post.url }}">
+                {{ post.title }}
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+      </section>
+      {% endif %}
+    {% endfor %}
+  </main>
+  {% if paginator.total_pages > 1 %}
+    <nav class="pagination">
+      {% if paginator.previous_page %}
+        <a class="paginationLink" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+      {% endif %}
+
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <em class="paginationLink paginationLinkCurrent">{{ page }}</em>
+      {% elsif page == 1 %}
+        <a class="paginationLink" href="/">{{ page }}</a>
+      {% else %}
+        <a class="paginationLink" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if paginator.next_page %}
+      <a class="paginationLink" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+    {% endif %}
+    </nav>
+  {% endif %}
